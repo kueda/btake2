@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  bee_id: 1
+  retakeable: 1
+  accessibility: 1
+
+two:
+  bee_id: 1
+  retakeable: 1
+  accessibility: 1

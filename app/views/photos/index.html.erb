@@ -1,0 +1,5 @@
+<h1>Photos</h1>
+
+<pre>
+  <%= JSON.pretty_generate @photos.as_json(:methods => Photo::FIELDS) %>
+</pre>
