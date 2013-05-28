@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  host: localhost
+  username: your_username
+  database: btake2_development
+
+development:
+  <<: *default
+  database: btake2_development
+
+test:
+  <<: *default
+  database: btake2_test
+
+production:
+  <<: *default
+  database: btake2_production

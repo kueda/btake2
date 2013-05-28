@@ -1,1 +1,8 @@
 Web application for browsing Calphotos landscapes and, eventually, reshooting them. Just getting started!
+
+SETUP
+
+cp config/database.yml.example config/database.yml
+# edit config/database.yml for your local setup
+rake db:create
+rake db:setup
