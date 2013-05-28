@@ -24,7 +24,16 @@ class Photo < ActiveRecord::Base
 
   def self.from_features(features)
     features.map do |feature|
-      new(:response => feature)
+      new_from_api_response(feature)
     end
+  end
+
+  def self.new_from_api_response(response)
+    new(:response => response)
+  end
+
+  def self.find_by_bee_record(id)
+    p = Photo.find_by_bee_id(id)
+    p ||= Photo.new_from_api_response(Bee.photo(id))
   end
 end

@@ -15,6 +15,7 @@
   <%= @photo.accessibility %>
 </p>
 
-
-<%= link_to 'Edit', edit_photo_path(@photo) %> |
-<%= link_to 'Back', photos_path %>
+<h2>JSON</h2>
+<pre>
+  <%= JSON.pretty_generate @photo.as_json(:methods => Photo::FIELDS) %>
+</pre>

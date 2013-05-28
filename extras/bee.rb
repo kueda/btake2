@@ -19,13 +19,16 @@ class Bee
   def request(method, params = {})
     params      = params.merge(@default_params)
     uri = if params.blank?
-      puts "ENDPOINT: #{ENDPOINT}"
       "#{ENDPOINT}/#{method}"
     else
       params_s    = "?" + params.map {|k,v| "#{k}=#{v}"}.join('&')
       [ENDPOINT, method, params_s].join('/')
     end
-    request_uri = URI.parse(uri)
+    request_url(uri)
+  end
+
+  def request_url(url)
+    request_uri = URI.parse(url)
     response = nil
     begin
       timed_out = Timeout::timeout(@timeout) do
@@ -45,18 +48,16 @@ class Bee
   end
 
   def method_missing(method, *args)
-    # puts "DEBUG: You tried to call '#{method}'" # test
-    # params = *args
-    # params = params.first if params.is_a?(Array) && params.size == 1
-    # unless params.nil? || (params.is_a?(Hash) and not params.empty?)
-    #   raise "#{@service_name}##{method} arguments must be a Hash"
-    # end
-    puts "[DEBUG] method_missing: #{method}"
     request(method, *args)
   end
 
+  def photo(id)
+    params_s = @default_params.map {|k,v| "#{k}=#{v}"}.join('&')
+    url = [ENDPOINT, 'photos', id, "?#{params_s}"].join('/')
+    request_url(url)
+  end
+
   def self.method_missing(method, *args)
-    puts "[DEBUG] self.method_missing: #{method}"
     @@bee ||= self.new
     @@bee.send(method, *args)
   end

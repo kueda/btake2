@@ -1,5 +1,22 @@
 <h1>Photos</h1>
+<table>
+  <tr>
+    <th>image</th>
+    <th>url</th>
+    <th>Actions</th>
+  </tr>
+  <% for photo in @photos %>
+    <tr>
+      <td>
+        <%= image_tag photo.media_url, :style => "max-width:200px;" %>
+      </td>
+      <td><%= photo.url %></td>
+      <td><%= link_to "View", photo_url(photo.record) %></td>
+    </tr>
+  <% end %>
+</table>
 
+<h2>JSON</h2>
 <pre>
   <%= JSON.pretty_generate @photos.as_json(:methods => Photo::FIELDS) %>
 </pre>
