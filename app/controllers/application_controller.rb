@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
   def after_sign_up_path_for(user)
     root_url
   end
+
+  def render_404
+    raise ActionController::RoutingError.new('Not Found')
+  end
 end

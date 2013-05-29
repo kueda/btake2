@@ -10,8 +10,13 @@ class PhotosController < ApplicationController
       bee_params[a] = params[a] unless params[a].blank?
     end
 
-    r = Bee.photos(bee_params)
-    @photos = Photo.from_features(r['features'])
+    begin
+      r = Bee.photos(bee_params)
+      @photos = Photo.from_features(r['features'])
+    rescue JSON::ParserError => e
+      Rails.logger.error "[ERROR #{Time.now}] Failed to parse JSON from BEE: #{e}"
+      @photos = []
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -92,8 +97,12 @@ class PhotosController < ApplicationController
       Photo.find_by_id(params[:id])
     end
     if @photo && @photo.response.blank? && @photo.bee_id
-      @photo.update_with_api_response(Bee.photo(@photo.bee_id))
+      begin
+        @photo.update_with_api_response(Bee.photo(@photo.bee_id))
+      rescue JSON::ParserError => e
+        Rails.logger.error "[ERROR #{Time.now}] Failed to parse JSON from BEE: #{e}"
+      end
     end
-    render(:status => 404) unless @photo
+    render_404 unless @photo
   end
 end

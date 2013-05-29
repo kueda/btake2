@@ -28,7 +28,7 @@ class Bee
   end
 
   def request_url(url)
-    request_uri = URI.parse(url)
+    request_uri = URI.parse(URI.escape(url))
     response = nil
     begin
       timed_out = Timeout::timeout(@timeout) do
