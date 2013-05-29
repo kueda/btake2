@@ -7,12 +7,12 @@ class Photo < ActiveRecord::Base
 
   def latitude
     return nil unless response
-    response['geometry']['coordinates'].last
+    response['geometry']['coordinates'].last if response['geometry']
   end
 
   def longitude
     return nil unless response
-    response['geometry']['coordinates'].first
+    response['geometry']['coordinates'].first if response['geometry']
   end
 
   def method_missing(method, *args)
