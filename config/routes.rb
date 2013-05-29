@@ -1,5 +1,9 @@
 Btake2::Application.routes.draw do
-  resources :photos
+  opinio_model
+
+  resources :photos do
+    opinio
+  end
   devise_for :users #, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
 

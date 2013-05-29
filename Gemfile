@@ -8,6 +8,7 @@ gem 'rails', '3.2.13'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+gem 'opinio'
 gem 'pg'
 
 
@@ -39,3 +40,5 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+gem "kaminari"

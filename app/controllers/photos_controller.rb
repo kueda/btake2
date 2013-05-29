@@ -4,7 +4,7 @@ class PhotosController < ApplicationController
   # GET /photos.json
   FILTERS = %w(state_province county genus scientific_name authors remote_id collection_code source min_date max_date page per_page)
   def index
-    bee_params = {}
+    bee_params = {:per_page => 200}
     FILTERS.each do |a|
       instance_variable_set("@#{a}", params[a])
       bee_params[a] = params[a] unless params[a].blank?
@@ -12,6 +12,8 @@ class PhotosController < ApplicationController
 
     r = Bee.photos(bee_params)
     @photos = Photo.from_features(r['features'])
+    Rails.logger.debug "[DEBUG] @photos.size: #{@photos.size}"
+    Rails.logger.debug "[DEBUG] @photos.first: #{@photos.first}"
 
     respond_to do |format|
       format.html # index.html.erb
@@ -90,6 +92,9 @@ class PhotosController < ApplicationController
       Photo.find_by_bee_record(params[:id])
     else
       Photo.find_by_id(params[:id])
+    end
+    if @photo && @photo.response.blank? && @photo.bee_id
+      @photo.update_with_api_response(Bee.photo(@photo.bee_id))
     end
     render(:status => 404) unless @photo
   end

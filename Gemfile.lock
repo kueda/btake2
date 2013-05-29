@@ -59,6 +59,9 @@ GEM
     json (1.8.0)
     jwt (0.1.5)
       multi_json (>= 1.0)
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -80,6 +83,10 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
+    opinio (0.6)
+      jquery-rails
+      kaminari
+      rails (~> 3)
     orm_adapter (0.4.0)
     pg (0.15.1)
     polyglot (0.3.3)
@@ -137,8 +144,10 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   devise
   jquery-rails
+  kaminari
   omniauth
   omniauth-google-oauth2
+  opinio
   pg
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)

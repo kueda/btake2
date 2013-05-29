@@ -11,10 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130528235321) do
+ActiveRecord::Schema.define(:version => 20130529070838) do
+
+  create_table "comments", :force => true do |t|
+    t.integer  "owner_id",         :null => false
+    t.integer  "commentable_id",   :null => false
+    t.string   "commentable_type", :null => false
+    t.text     "body",             :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "photos", :force => true do |t|
-    t.integer  "bee_id"
+    t.string   "bee_id"
     t.integer  "retakeable"
     t.integer  "accessibility"
     t.datetime "created_at",    :null => false

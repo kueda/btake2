@@ -28,6 +28,9 @@
   </table>
 </div>
 
+<h2>Comments</h2>
+<%= comments_for @photo %>
+
 <h2>JSON</h2>
 <pre>
   <%= JSON.pretty_generate @photo.as_json(:methods => Photo::FIELDS) %>
