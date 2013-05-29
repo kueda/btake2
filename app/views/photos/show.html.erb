@@ -15,8 +15,30 @@
           <tr><th>original filename</th><td>VTM00005619</td></tr>
           <tr><th>BEE record</th><td><%= link_to @photo.record, @photo.url %></td></tr>
           <tr><th>retakes taken</th><td>none</td></tr>
-          <tr><th>Retakeable</th><td><%= @photo.retakeable %></td></tr>
-          <tr><th>Accessibility</th><td><%= @photo.accessibility %></td></tr>
+          <tr>
+            <th>Retakeable?</th>
+            <td>
+              <%= form_for @photo, :html => {:class => "form-inline"} do |f| %>
+                <label class="radio"><%= f.radio_button :retakeable, 1 %> yes</label>
+                <label class="radio"><%= f.radio_button :retakeable, 0 %> no</label>
+                <label class="radio"><%= f.radio_button :retakeable, 'unknown', :checked => f.object.retakeable.nil? %> unknown</label>
+                <%= f.submit "Save", :class => "btn" %>
+              <% end -%>
+            </td>
+          </tr>
+          <tr>
+            <th>Accessibility</th>
+            <td>
+              <%= @photo.accessibility %>
+              <%= form_for @photo, :html => {:class => "form-inline"} do |f| %>
+                <label class="radio"><%= f.radio_button :accessibility, 3 %> Oh yeah</label>
+                <label class="radio"><%= f.radio_button :accessibility, 2 %> Meh</label>
+                <label class="radio"><%= f.radio_button :accessibility, 1 %> Nope</label>
+                <label class="radio"><%= f.radio_button :accessibility, 'unknown', :checked => f.object.accessibility.nil? %> unknown</label>
+                <%= f.submit "Save", :class => "btn" %>
+              <% end -%>
+            </td>
+          </tr>
         </table>
       </td>
     </tr>
@@ -31,7 +53,3 @@
 <h2>Comments</h2>
 <%= comments_for @photo %>
 
-<h2>JSON</h2>
-<pre>
-  <%= JSON.pretty_generate @photo.as_json(:methods => Photo::FIELDS) %>
-</pre>

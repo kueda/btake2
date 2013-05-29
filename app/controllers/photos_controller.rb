@@ -1,5 +1,6 @@
 class PhotosController < ApplicationController
   before_filter :load_photo, :only => [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
   # GET /photos
   # GET /photos.json
   FILTERS = %w(state_province county genus scientific_name authors remote_id collection_code source min_date max_date page per_page)
@@ -68,8 +69,16 @@ class PhotosController < ApplicationController
   # PUT /photos/1
   # PUT /photos/1.json
   def update
+    photo_params = params[:photo].clone
+    if photo_params[:retakeable]
+      photo_params[:retakeable] = %(yes true 1).include?(photo_params[:retakeable].to_s.downcase)
+      photo_params[:retakeable] = nil if params[:photo][:retakeable] == 'unknown'
+    end
+    if photo_params[:accessibility]
+      photo_params[:accessibility] = nil if params[:photo][:accessibility] == 'unknown'
+    end
     respond_to do |format|
-      if @photo.update_attributes(params[:photo])
+      if @photo.update_attributes(photo_params)
         format.html { redirect_to @photo, notice: 'Photo was successfully updated.' }
         format.json { head :no_content }
       else
