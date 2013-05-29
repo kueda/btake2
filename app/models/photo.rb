@@ -15,6 +15,13 @@ class Photo < ActiveRecord::Base
     response['geometry']['coordinates'].first if response['geometry']
   end
 
+  def thumb_url
+    calphotos_id = bee_id.to_s[/^Calphotos:(.+)/, 1]
+    return media_url unless calphotos_id
+    pieces = bee_id.split('+')
+    "http://calphotos.berkeley.edu/imgs/256x384/#{pieces[0]}_#{pieces[1]}/#{pieces[2]}/#{pieces[3]}.jpeg"
+  end
+
   def method_missing(method, *args)
     return nil unless response
     response['properties'][method.to_s]

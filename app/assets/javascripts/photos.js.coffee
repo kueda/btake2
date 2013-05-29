@@ -10,7 +10,7 @@ class eco.MapContainer
       subdomains: '1234'
     @map = new L.Map('map', attributionControl: false)
       .addLayer(@basetiles)
-      .setView(L.latLng(42.5, -108.5), 5)
+      .setView(L.latLng(38, -121.5), 6)
 
   addPhotos: ->
     photos = new L.GeoJSON null,
@@ -22,8 +22,11 @@ class eco.MapContainer
         layer.bindPopup(elem.prop('outerHTML'))
     @map.addLayer(photos)
     #'http://infinite-oasis-8600.herokuapp.com/photos.json'
-    $.getJSON '/photos.json', (data) =>
-      photos.addData((d.response for d in data))
+    if PHOTOS?
+      photos.addData((d.response for d in PHOTOS))
+    else
+      $.getJSON '/photos.json', (data) =>
+        photos.addData((d.response for d in data))
 
 
 $(document).ready ->

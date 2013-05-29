@@ -8,7 +8,9 @@
 .photo table td {vertical-align: top;}
 .photo table img {max-width:800px;}
 .photo iframe {width: 100%; height: 300px;}
-a.photo img {max-width:200px;}
+$gridsize: 190px;
+#tab-grid a {display:inline-block; width:$gridsize; height: $gridsize;text-align:center;}
+#tab-grid a.photo img {max-height:$gridsize; max-width:$gridsize;}
 
 @media print
 {

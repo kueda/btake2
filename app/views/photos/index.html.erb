@@ -1,44 +1,54 @@
 <div class="container">
-<div class="row">
-  <div class="span4">
-    <h3>Filters</h3>
-    <p>location</p>
-    <p>accessibility</p>
-    <p>reshootability</p>
-    <p>time/year (may use a time slider)</p>
-    <p>is there any reshoot?</p>
-    <p>photographer</p>
-    <p>species</p>
-    <form method="get">
-      <fieldset>
-        <legend>Filters</legend>
-        <label>County</label>
-        <input name="county" type="text" placeholder="Trinity">
-        <span class="help-block">helpful text here...</span>
-        <button type="submit" class="btn">Submit</button>
-      </fieldset>
-    </form>
-  </div>
+  <div class="row">
+    <div class="span4">
+      <h3>Filters</h3>
+      <p>location</p>
+      <p>accessibility</p>
+      <p>reshootability</p>
+      <p>time/year (may use a time slider)</p>
+      <p>is there any reshoot?</p>
+      <p>photographer</p>
+      <p>species</p>
+      <form method="get">
+        <fieldset>
+          <legend>Filters</legend>
+          <label>County</label>
+          <input name="county" type="text" placeholder="Trinity" value="<%= @county %>">
+          <span class="help-block">helpful text here...</span>
+          <button type="submit" class="btn">Submit</button>
+        </fieldset>
+      </form>
+    </div>
 
-  <div class="tabbable span8">
-    <ul class="nav nav-tabs">
-      <li class="active nav-links">
-      <a href="#tab-map" data-toggle="tab">Map</a>
-      </li>
-      <li class="nav-links"><a href="#tab-grid" data-toggle="tab">Grid</a></li>
-    </ul>
-    <div class="tab-content">
-      <div id="tab-map" class="tab-pane active">
-        <div id="map"></div>
-        <!--<img src="about:blank" width=250 class="hide img-polaroid">-->
-        <!--<div class="thumbnail hide">-->
-          <!--<img data-src="holder.js/300x200" alt="">-->
-        <!--</div>-->
-      </div>
-      <div id="tab-grid" class="tab-pane">
-        showing a grid of photos
+    <div class="tabbable span8">
+      <ul class="nav nav-tabs">
+        <li class="active nav-links">
+        <a href="#tab-map" data-toggle="tab">Map</a>
+        </li>
+        <li class="nav-links"><a href="#tab-grid" data-toggle="tab">Grid</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="tab-map" class="tab-pane active">
+          <div id="map"></div>
+          <!--<img src="about:blank" width=250 class="hide img-polaroid">-->
+          <!--<div class="thumbnail hide">-->
+            <!--<img data-src="holder.js/300x200" alt="">-->
+          <!--</div>-->
+        </div>
+        <div id="tab-grid" class="tab-pane">
+          <% if !@photos.blank? %>
+            <% for photo in @photos %>
+              <%= link_to image_tag(photo.thumb_url), photo, :class => "photo" %>
+            <% end %>
+          <% else %>
+            No matching photos
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div>
+<%= link_to "Next page", url_for(params.merge(:page => @page + 1)) %>
+<script type="text/javascript">
+  var PHOTOS = <%=raw @photos.to_json(:methods => Photo::FIELDS) %>
+</script>
