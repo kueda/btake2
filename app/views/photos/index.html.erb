@@ -45,10 +45,10 @@
           <% end %>
         </div>
       </div>
+      <%= link_to "Next page", url_for(params.merge(:page => @page + 1)) %>
     </div>
   </div>
 </div>
-<%= link_to "Next page", url_for(params.merge(:page => @page + 1)) %>
 <script type="text/javascript">
   var PHOTOS = <%=raw @photos.to_json(:methods => Photo::FIELDS) %>
 </script>

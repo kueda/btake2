@@ -15,11 +15,14 @@ class eco.MapContainer
   addPhotos: ->
     photos = new L.GeoJSON null,
       onEachFeature: (feature, layer) ->
-        prop = feature?.properties?.media_url
-        elem = $('<img>').attr('src', prop)
+        mediaUrl = feature?.properties?.media_url
+        record = feature?.properties?.record
+        link = $('<a></a>').attr('href', '/photos/'+record)
+        img = $('<img>').attr('src', mediaUrl)
           .addClass('img-polaroid')
           .width(250)
-        layer.bindPopup(elem.prop('outerHTML'))
+        link.append(img)
+        layer.bindPopup(link.prop('outerHTML'))
     @map.addLayer(photos)
     #'http://infinite-oasis-8600.herokuapp.com/photos.json'
     if PHOTOS?
