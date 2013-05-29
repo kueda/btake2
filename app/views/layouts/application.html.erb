@@ -8,6 +8,20 @@
 </head>
 <body>
 
+<div id="header">
+  <div class="right">
+    <% if user_signed_in? -%>
+      <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+    <% else %>
+      <%= link_to "Sign in", new_user_session_url %>
+    <% end -%>
+  </div>
+  <strong><%= link_to "btake2", root_url %></strong>
+  Reshoot photos from Berkeley's historic photo archives
+</div>
+
+<p id="notice"><%= notice %></p>
+
 <%= yield %>
 
 </body>

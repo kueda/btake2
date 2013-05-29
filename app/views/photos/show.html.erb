@@ -1,34 +1,33 @@
-<p id="notice"><%= notice %></p>
-<table class="photo">
-<tr>
-<td valign="top"><img src="<%= @photo.media_url %>"></td>
-<td valign="top">
-<table>
-<tr>
-<td height="50%">
-<p>begin date: <%= @photo.begin_date %></p>
-<p>end date: <%= @photo.end_date %></p>
-<p>latitude: <%= @photo.latitude %> longitude: <%= @photo.longitude %></p>
-<p>location: <%= @photo.locality %></p>
-<p>county: <%= @photo.county %></p>
-<p>notes: <%= @photo.photog_notes %></p>
-<p>original photo number: 332707</p>
-<p>original filename: VTM00005619</p>
-<p>BEE record: <%= link_to @photo.record, @photo.url %></p>
-<p>retakes taken: none</p>
-<p><b>Retakeable:</b> <%= @photo.retakeable %></p>
-<p><b>Accessibility:</b> <%= @photo.accessibility %></p>
-</td>
-</tr>
-<tr>
-<td height="50%" valign="top"><iframe src=
-"http://mapper.acme.com/?ll=<%= @photo.latitude %>,<%= @photo.longitude %>&amp;z=13&amp;t=T&amp;marker0=35.69955%2C-118.21203%2C1.2%20km%20NE%20of%20Onyx%20CA"
-height="600" width="100%"></iframe></td>
-</tr>
-</table>
-</td>
-</tr>
-</table>
+<div class="photo">
+  <table>
+    <tr>
+      <td rowspan="2"><img src="<%= @photo.media_url %>"></td>
+      <td>
+        <table>
+          <tr><th>begin date</th><td><%= @photo.begin_date %></td></tr>
+          <tr><th>end date</th><td><%= @photo.end_date %></td></tr>
+          <tr><th>latitude</th><td><%= @photo.latitude %></td></tr>
+          <tr><th>longitude</th><td><%= @photo.longitude %></td></tr>
+          <tr><th>location</th><td><%= @photo.locality %></td></tr>
+          <tr><th>county</th><td><%= @photo.county %></td></tr>
+          <tr><th>notes</th><td><%= @photo.photog_notes %></td></tr>
+          <tr><th>original photo number</th><td>332707</td></tr>
+          <tr><th>original filename</th><td>VTM00005619</td></tr>
+          <tr><th>BEE record</th><td><%= link_to @photo.record, @photo.url %></td></tr>
+          <tr><th>retakes taken</th><td>none</td></tr>
+          <tr><th>Retakeable</th><td><%= @photo.retakeable %></td></tr>
+          <tr><th>Accessibility</th><td><%= @photo.accessibility %></td></tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <iframe src="http://mapper.acme.com/?ll=<%= @photo.latitude %>,<%= @photo.longitude %>&amp;z=13&amp;t=T&amp;marker0=35.69955%2C-118.21203%2C1.2%20km%20NE%20of%20Onyx%20CA"></iframe>
+      </td>
+    </tr>
+  </table>
+</div>
+
 <h2>JSON</h2>
 <pre>
   <%= JSON.pretty_generate @photo.as_json(:methods => Photo::FIELDS) %>
