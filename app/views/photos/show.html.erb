@@ -29,7 +29,6 @@
           <tr>
             <th>Accessibility</th>
             <td>
-              <%= @photo.accessibility %>
               <%= form_for @photo, :html => {:class => "form-inline"} do |f| %>
                 <label class="radio"><%= f.radio_button :accessibility, 3 %> Oh yeah</label>
                 <label class="radio"><%= f.radio_button :accessibility, 2 %> Meh</label>
