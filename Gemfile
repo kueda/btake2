@@ -10,6 +10,7 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'opinio'
 gem 'pg'
+gem "twitter-bootstrap-rails"
 
 
 # Gems used only for assets and not required

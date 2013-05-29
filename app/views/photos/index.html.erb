@@ -1,19 +1,10 @@
-<table>
-  <tr>
-    <th>image</th>
-    <th>url</th>
-    <th>Actions</th>
-  </tr>
+<% if !@photos.blank? %>
   <% for photo in @photos %>
-    <tr>
-      <td>
-        <%= image_tag photo.media_url, :style => "max-width:200px;" %>
-      </td>
-      <td><%= photo.url %></td>
-      <td><%= link_to "View", photo_url(photo.record) %></td>
-    </tr>
+    <%= link_to image_tag(photo.media_url), photo, :class => "photo" %>
   <% end %>
-</table>
+<% else %>
+  
+<% end %>
 
 <h2>JSON</h2>
 <pre>
