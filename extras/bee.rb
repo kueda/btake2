@@ -11,7 +11,7 @@ class Bee
     @service_name = 'Web Service'
     @timeout ||= 5
     @method_param ||= 'function'
-    @default_params = {:format => 'json'}
+    @default_params = {:format => 'geojson'}
     # @debug = options[:debug]
     @debug = true
   end
